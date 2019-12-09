@@ -1,0 +1,23 @@
+version: '3'
+services:
+  pgbadger:
+    image: cleitondomazak/pgbadger-rds:latest
+    container_name: your_countainer_name
+    environment:
+      INSTANCEID: "RDS_ID"
+      JOBS: 2
+      RETENTION: 4
+      PGBADGER_DATA: "/data"
+      PGBADGER_LOGS: "/pg_log"
+      AWS_ACCESS_KEY: ""
+      AWS_SECRET_KEY: ""
+      AWS_S3_REGION: ""
+      AWS_S3_BUCKET: ""
+      CRON: 1 #0 disable cron, execute one time
+      CRON_PATTERN: "10 */1 * * *"
+    volumes:
+      - "pg_log:/pg_log"
+      - "data:/data"
+volumes:
+  pg_log:
+  data:
